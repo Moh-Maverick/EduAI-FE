@@ -51,7 +51,7 @@ export const apiUtils = {
       if (response.ok) {
         return await response.json();
       }
-    } catch (error) {
+    } catch {
       console.warn('Backend not available, using mock registration');
     }
 
@@ -91,7 +91,7 @@ export const apiUtils = {
       if (response.ok) {
         return await response.json();
       }
-    } catch (error) {
+    } catch {
       console.warn('Backend not available, using mock login');
     }
 

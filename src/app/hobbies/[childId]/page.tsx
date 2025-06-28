@@ -1,6 +1,7 @@
 "use client";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 
 const hobbies = [
   { title: "Drawing", description: "Unleash your imagination with colors and sketches", icon: "🖍️" },
@@ -67,7 +68,7 @@ export default function HobbiesPage() {
           </div>
           <div className="flex flex-1 justify-end gap-8">
             <div className="flex items-center gap-9">
-              <a className="text-[#101518] text-sm font-medium leading-normal" href="/">Home</a>
+              <Link className="text-[#101518] text-sm font-medium leading-normal" href="/">Home</Link>
             </div>
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => setShowDropdown(!showDropdown)}>
               <img src={parentAvatar} alt="profile" className="w-10 h-10 rounded-full border-2 border-[#3d98f4]" />
@@ -78,7 +79,7 @@ export default function HobbiesPage() {
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
             <h2 className="text-[#0f151a] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">What are your interests?</h2>
-            <p className="text-[#0f151a] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">Select your child's hobbies to help us tailor their learning experience.</p>
+            <p className="text-[#0f151a] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">Select your child&apos;s hobbies to help us tailor their learning experience.</p>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
               {hobbies.map((hobby: { title: string; description: string; icon: string }, idx: number) => (
                 <div

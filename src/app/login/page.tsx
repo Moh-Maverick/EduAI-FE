@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
+import Link from "next/link";
 import apiUtils from "@/utils/api";
 
 export default function LoginPage() {
@@ -24,7 +25,7 @@ export default function LoginPage() {
         parent_mobile: parentMobile,
         password,
       });
-      
+
       if (data.success) {
         setSubmitting(false);
         // Save children and parentName to localStorage
@@ -55,15 +56,15 @@ export default function LoginPage() {
           <div className="flex items-center gap-4 text-[#0c151d]">
             <div className="size-6">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 19.5C4 18.1193 5.11929 17 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6.5 2H20V22H6.5C5.11929 22 4 20.8807 4 19.5V4.5C4 3.11929 5.11929 2 6.5 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M4 19.5C4 18.1193 5.11929 17 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6.5 2H20V22H6.5C5.11929 22 4 20.8807 4 19.5V4.5C4 3.11929 5.11929 2 6.5 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
             <span className="text-[#0c151d] text-lg font-bold leading-tight tracking-[-0.015em]">EduAI</span>
           </div>
           <div className="flex flex-1 justify-end gap-8">
             <div className="flex items-center gap-9">
-              <a className="text-[#0c151d] text-sm font-medium leading-normal" href="/">Home</a>
+              <Link className="text-[#0c151d] text-sm font-medium leading-normal" href="/">Home</Link>
               <a className="text-[#0c151d] text-sm font-medium leading-normal" href="#about">About</a>
               <a className="text-[#0c151d] text-sm font-medium leading-normal" href="#courses">Courses</a>
               <a className="text-[#0c151d] text-sm font-medium leading-normal" href="#contact">Contact</a>
@@ -99,7 +100,7 @@ export default function LoginPage() {
                       {submitting ? "Logging in..." : "Log In"}
                     </button>
                   </div>
-                  <p className="text-[#4574a1] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">Don't have an account? <a href="/register" className="underline">Register</a></p>
+                  <p className="text-[#4574a1] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">Don&apos;t have an account? <Link href="/register" className="underline">Register</Link></p>
                 </form>
               </div>
             </main>

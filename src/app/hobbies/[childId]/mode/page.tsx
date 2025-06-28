@@ -7,14 +7,11 @@ export default function ModePage() {
   const params = useParams();
   const childId = params.childId;
   const [child, setChild] = useState<any>(null);
-  const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
-  const [selectedMode, setSelectedMode] = useState<string>("");
 
   useEffect(() => {
     const children = JSON.parse(localStorage.getItem("children") || "[]");
     const found = children.find((c: any) => String(c.id) === String(childId));
     setChild(found);
-    setSelectedHobbies(found?.hobbies || []);
   }, [childId]);
 
   if (!child) return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
@@ -45,7 +42,7 @@ export default function ModePage() {
             </p>
             <div className="flex flex-row gap-6 justify-center mb-6">
               <div
-                className={`flex flex-1 min-w-[200px] max-w-[260px] cursor-pointer items-center gap-4 bg-gray-50 px-4 min-h-[72px] py-4 rounded-xl border transition-all duration-200 ${selectedMode === 'academics' ? 'border-[#699dcd] ring-2 ring-[#699dcd] bg-white' : 'border-transparent'}`}
+                className="flex flex-1 min-w-[200px] max-w-[260px] cursor-pointer items-center gap-4 bg-gray-50 px-4 min-h-[72px] py-4 rounded-xl border border-transparent transition-all duration-200 hover:border-[#699dcd]"
                 onClick={() => router.push(`/hobbies/${childId}/academics`)}
               >
                 <div className="text-[#101518] flex items-center justify-center rounded-lg bg-[#eaedf1] shrink-0 size-12">
@@ -59,7 +56,7 @@ export default function ModePage() {
                 </div>
               </div>
               <div
-                className={`flex flex-1 min-w-[200px] max-w-[260px] cursor-pointer items-center gap-4 bg-gray-50 px-4 min-h-[72px] py-4 rounded-xl border transition-all duration-200 ${selectedMode === 'hobbies' ? 'border-[#699dcd] ring-2 ring-[#699dcd] bg-white' : 'border-transparent'}`}
+                className="flex flex-1 min-w-[200px] max-w-[260px] cursor-pointer items-center gap-4 bg-gray-50 px-4 min-h-[72px] py-4 rounded-xl border border-transparent transition-all duration-200 hover:border-[#699dcd]"
                 onClick={() => router.push(`/hobbies/${childId}/hobby-zone`)}
               >
                 <div className="text-[#101518] flex items-center justify-center rounded-lg bg-[#eaedf1] shrink-0 size-12">
@@ -73,7 +70,7 @@ export default function ModePage() {
                 </div>
               </div>
               <div
-                className={`flex flex-1 min-w-[200px] max-w-[260px] cursor-pointer items-center gap-4 bg-gray-50 px-4 min-h-[72px] py-4 rounded-xl border transition-all duration-200 ${selectedMode === 'story' ? 'border-[#699dcd] ring-2 ring-[#699dcd] bg-white' : 'border-transparent'}`}
+                className="flex flex-1 min-w-[200px] max-w-[260px] cursor-pointer items-center gap-4 bg-gray-50 px-4 min-h-[72px] py-4 rounded-xl border border-transparent transition-all duration-200 hover:border-[#699dcd]"
                 onClick={() => router.push(`/hobbies/${childId}/story-mode`)}
               >
                 <div className="text-[#101518] flex items-center justify-center rounded-lg bg-[#eaedf1] shrink-0 size-12">

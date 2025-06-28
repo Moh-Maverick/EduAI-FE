@@ -8,7 +8,7 @@ const YT_QUERY = "fun science experiments for kids";
 
 export default function ScienceChatPage() {
   const params = useParams();
-  const [messages, setMessages] = useState<{role: string, content: string, fileName?: string, fileType?: string}[]>([]);
+  const [messages, setMessages] = useState<{ role: string, content: string, fileName?: string, fileType?: string }[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [videos, setVideos] = useState<any[]>([]);
@@ -73,7 +73,7 @@ export default function ScienceChatPage() {
       const data = await res.json();
       const aiMsg = { role: "assistant", content: data.choices?.[0]?.message?.content || "Sorry, I couldn't help with that. Try rephrasing your question!" };
       setMessages(msgs => [...msgs, aiMsg]);
-    } catch (err) {
+    } catch {
       setMessages(msgs => [...msgs, { role: "assistant", content: "Sorry, there was a problem connecting to Edu me AI's science tutor. Please try again." }]);
     }
     setLoading(false);
@@ -162,7 +162,7 @@ export default function ScienceChatPage() {
         <div className="flex-1 flex flex-col p-6">
           <h3 className="text-xl font-bold mb-4 text-[#0f151a]">Explore Science Videos</h3>
           <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
-            {videos.map((vid, i) => (
+            {videos.map((vid) => (
               <a key={vid.id.videoId} href={`https://www.youtube.com/watch?v=${vid.id.videoId}`} target="_blank" rel="noopener noreferrer" className="block bg-white rounded-xl shadow border border-[#d2dce4] p-3 hover:shadow-md transition">
                 <img src={vid.snippet.thumbnails.medium.url} alt={vid.snippet.title} className="rounded mb-2 w-full" />
                 <div className="font-semibold text-[#0f151a] mb-1">{vid.snippet.title}</div>

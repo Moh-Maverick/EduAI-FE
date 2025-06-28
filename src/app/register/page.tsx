@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
 import apiUtils from "@/utils/api";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const [childName, setChildName] = useState("");
@@ -87,7 +88,7 @@ export default function RegisterPage() {
         parent_mobile: parentMobile,
         password,
       });
-      
+
       if (data.success) {
         setSubmitting(false);
         // Save children and parentName to localStorage (simulate one child just registered)
@@ -122,8 +123,8 @@ export default function RegisterPage() {
           <div className="flex items-center gap-4 text-[#0c151d]">
             <div className="size-6">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 19.5C4 18.1193 5.11929 17 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6.5 2H20V22H6.5C5.11929 22 4 20.8807 4 19.5V4.5C4 3.11929 5.11929 2 6.5 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M4 19.5C4 18.1193 5.11929 17 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6.5 2H20V22H6.5C5.11929 22 4 20.8807 4 19.5V4.5C4 3.11929 5.11929 2 6.5 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
             <span className="text-[#0c151d] text-lg font-bold leading-tight tracking-[-0.015em]">EduAI</span>
@@ -201,37 +202,37 @@ export default function RegisterPage() {
                   <div className="flex max-w-[480px] flex-wrap items-end gap-4 py-1">
                     <label className="flex flex-col min-w-40 flex-1">
                       <input type="password" placeholder="Confirm Password" className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0c151d] focus:outline-0 focus:ring-0 border-none bg-[#e6edf4] focus:border-none h-14 placeholder:text-[#4574a1] p-4 text-base font-normal leading-normal" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
-                {passwordError && <div className="text-xs text-red-600 mt-1">{passwordError}</div>}
+                      {passwordError && <div className="text-xs text-red-600 mt-1">{passwordError}</div>}
                     </label>
                   </div>
                   {formError && <div className="text-xs text-red-600 mt-1 text-center">{formError}
                     {formError.includes('already exists') && (
                       <button className="ml-2 underline text-blue-600" type="button" onClick={() => router.push('/login')}>Log In</button>
-          )}
+                    )}
                   </div>}
                   <div className="flex px-0 py-3">
-          <button
-            type="submit"
+                    <button
+                      type="submit"
                       className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#359dff] text-[#0c151d] text-base font-bold leading-normal tracking-[0.015em] disabled:opacity-50"
-            disabled={
-              submitting ||
-              !childName ||
+                      disabled={
+                        submitting ||
+                        !childName ||
                         !childGender ||
-              !childDob ||
-              !parentName ||
-              !parentDob ||
-              !parentMobile ||
-              !password ||
-              !confirmPassword ||
-              password !== confirmPassword ||
-              (parentAge !== null && parentAge < 18)
-            }
-          >
+                        !childDob ||
+                        !parentName ||
+                        !parentDob ||
+                        !parentMobile ||
+                        !password ||
+                        !confirmPassword ||
+                        password !== confirmPassword ||
+                        (parentAge !== null && parentAge < 18)
+                      }
+                    >
                       {submitting ? "Registering..." : "Register"}
-          </button>
+                    </button>
                   </div>
-                  <p className="text-[#4574a1] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">Already have an account? <a href="/login" className="underline">Log In</a></p>
-        </form>
+                  <p className="text-[#4574a1] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">Already have an account? <Link href="/login" className="underline">Log In</Link></p>
+                </form>
               </div>
             </main>
           </div>

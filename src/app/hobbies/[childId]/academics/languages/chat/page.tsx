@@ -7,7 +7,7 @@ const YT_QUERY = "learn languages for kids";
 
 export default function LanguagesChatPage() {
   const params = useParams();
-  const [messages, setMessages] = useState<{role: string, content: string, fileName?: string, fileType?: string}[]>([]);
+  const [messages, setMessages] = useState<{ role: string, content: string, fileName?: string, fileType?: string }[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [videos, setVideos] = useState<any[]>([]);
@@ -71,7 +71,7 @@ export default function LanguagesChatPage() {
       const data = await res.json();
       const aiMsg = { role: "assistant", content: data.choices?.[0]?.message?.content || "Sorry, I couldn't help with that. Try rephrasing your question!" };
       setMessages(msgs => [...msgs, aiMsg]);
-    } catch (err) {
+    } catch {
       setMessages(msgs => [...msgs, { role: "assistant", content: "Sorry, there was a problem connecting to the language tutor. Please try again." }]);
     }
     setLoading(false);

@@ -103,12 +103,10 @@ const stories = {
 };
 
 export default function StoryModePage() {
-  const params = useParams();
   const [selectedStory, setSelectedStory] = useState<string>("goldilocks");
   const [playing, setPlaying] = useState(false);
   const [currentLine, setCurrentLine] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
-  const ttsRef = useRef<any>(null);
   const intervalRef = useRef<any>(null);
   const ttsActiveRef = useRef(false);
 
@@ -167,18 +165,17 @@ export default function StoryModePage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-8 px-2" style={{ fontFamily: 'Lexend, Noto Sans, sans-serif' }}>
       <h2 className="text-3xl font-bold mb-4 text-[#0f151a]">Story Mode</h2>
-      
+
       {/* Story Selection */}
       <div className="flex gap-4 mb-6 items-center">
         {Object.entries(stories).map(([key, story], idx, arr) => (
           <React.Fragment key={key}>
             <button
               key={key}
-              className={`rounded-full px-6 py-3 text-lg font-bold border-2 transition-all duration-200 ${
-                selectedStory === key 
-                  ? 'bg-[#3182cd] text-white border-[#3182cd]' 
-                  : 'bg-white text-[#3182cd] border-[#3182cd] hover:bg-[#e9f2fc]'
-              }`}
+              className={`rounded-full px-6 py-3 text-lg font-bold border-2 transition-all duration-200 ${selectedStory === key
+                ? 'bg-[#3182cd] text-white border-[#3182cd]'
+                : 'bg-white text-[#3182cd] border-[#3182cd] hover:bg-[#e9f2fc]'
+                }`}
               onClick={() => {
                 setSelectedStory(key);
                 setPlaying(false);
@@ -214,7 +211,7 @@ export default function StoryModePage() {
           ■ Stop
         </button>
       </h3>
-      
+
       <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl bg-white rounded-xl shadow-lg border border-[#d2dce4] p-6 items-center">
         {/* Slideshow */}
         <div className="flex-1 flex flex-col items-center">
