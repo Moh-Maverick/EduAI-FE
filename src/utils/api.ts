@@ -2,6 +2,9 @@
 const GROQ_API_KEY = process.env.NEXT_PUBLIC_GROQ_API_KEY;
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
 
+// Log the backend URL being used (helpful for debugging)
+console.log('Backend URL configured:', BACKEND_URL);
+
 // API endpoints
 export const API_ENDPOINTS = {
   GROQ_CHAT: 'https://api.groq.com/openai/v1/chat/completions',
@@ -41,18 +44,30 @@ export const apiUtils = {
     password: string;
   }) => {
     try {
-      // Try real backend first
+      console.log('Attempting to register with backend at:', API_ENDPOINTS.BACKEND_REGISTER);
+
+      // Try real backend first with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       const response = await fetch(API_ENDPOINTS.BACKEND_REGISTER, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
+
       if (response.ok) {
-        return await response.json();
+        const result = await response.json();
+        console.log('Registration successful with backend');
+        return result;
+      } else {
+        console.warn('Backend registration failed with status:', response.status);
       }
-    } catch {
-      console.warn('Backend not available, using mock registration');
+    } catch (error) {
+      console.warn('Backend not available, using mock registration. Error:', error);
     }
 
     // Mock registration fallback
@@ -81,18 +96,30 @@ export const apiUtils = {
     password: string;
   }) => {
     try {
-      // Try real backend first
+      console.log('Attempting to login with backend at:', API_ENDPOINTS.BACKEND_LOGIN);
+
+      // Try real backend first with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       const response = await fetch(API_ENDPOINTS.BACKEND_LOGIN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
+
       if (response.ok) {
-        return await response.json();
+        const result = await response.json();
+        console.log('Login successful with backend');
+        return result;
+      } else {
+        console.warn('Backend login failed with status:', response.status);
       }
-    } catch {
-      console.warn('Backend not available, using mock login');
+    } catch (error) {
+      console.warn('Backend not available, using mock login. Error:', error);
     }
 
     // Mock login fallback
